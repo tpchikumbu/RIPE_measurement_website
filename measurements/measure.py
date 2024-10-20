@@ -18,8 +18,8 @@ def get_ping_rtt(data):
     # Get the RTT of the ping
     if data:
         for obj in data:
-            id = obj["prb_id"]
-            print(f"Probe ID: {id}")
+            prb_id = obj["prb_id"]
+            print(f"Probe ID: {prb_id}")
             for result in obj["result"]:
                 print(result["rtt"])
             print("--------------------")
