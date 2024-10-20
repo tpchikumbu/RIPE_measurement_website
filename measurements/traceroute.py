@@ -1,4 +1,5 @@
 import requests
+import json
 
 def get_data_from_url(url):
     try:
@@ -12,8 +13,15 @@ def get_data_from_url(url):
 def main():
     url = "https://atlas.ripe.net/api/v2/measurements/80566292/results/?format=txt"
     data = get_data_from_url(url)
-    if data:
-        print(data)
+    # # Split the data into lines
+    # if data:
+    #     lines = data.splitlines()
+    #     json_objects = [json.loads(line) for line in lines]
+    #     for obj in json_objects:
+    #         print(obj)
+
+    # if data:
+    #     print(data)
         
 
 if __name__ == "__main__":
