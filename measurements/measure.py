@@ -19,14 +19,21 @@ def get_ping_rtt(data):
     if data:
         for obj in data:
             prb_id = obj["prb_id"]
+            src_ip = obj["from"]
             print(f"Probe ID: {prb_id}")
-            for result in obj["result"]:
-                print(result["rtt"])
+            # for result in obj["result"]:
+            get_country(src_ip)
             print("--------------------")
     return None
+
+# Function to get country from IP using ip-api.com
+def get_country(ip):
+    response = requests.get(f"http://ip-api.com/json/{ip}")
+    data = response.json()
+    return data.get("country", "Unknown")
      
 def main():
-    url = "https://atlas.ripe.net/api/v2/measurements/80566291/results/?format=txt"
+    url = "https://atlas.ripe.net/api/v2/measurements/80602536/results/?start=1729461600&stop=1729871509&format=txt"
     data = get_data_from_url(url)
     
     if data:
