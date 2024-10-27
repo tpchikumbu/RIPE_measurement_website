@@ -1,5 +1,8 @@
 import requests
 import json
+from collections import defaultdict
+
+country_probe_map = defaultdict(set)
 
 def get_data_from_url(url : str):
     # Get data from the URL as a JSON object
@@ -22,7 +25,8 @@ def get_ping_rtt(data):
             src_ip = obj["from"]
             print(f"Probe ID: {prb_id}")
             # for result in obj["result"]:
-            get_country(src_ip)
+            loc = get_country(src_ip)
+            country_probe_map[loc].add(prb_id)
             print("--------------------")
     return None
 
@@ -33,11 +37,12 @@ def get_country(ip):
     return data.get("country", "Unknown")
      
 def main():
-    url = "https://atlas.ripe.net/api/v2/measurements/80602536/results/?start=1729461600&stop=1729871509&format=txt"
+    url = "https://atlas.ripe.net/api/v2/measurements/80602536/results/?start=1729461600&stop=1729571509&format=txt"
     data = get_data_from_url(url)
     
     if data:
         get_ping_rtt(data)
+        print(country_probe_map)
         
 
 if __name__ == "__main__":
